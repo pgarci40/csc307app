@@ -14,6 +14,11 @@ const findUserById = (id) =>
     users["user_list"].find((user) =>
     user["id"] === id);
 
+const addUser = (user) => {
+    users["user_list"].push(user);
+    return user;
+};
+
 
 const users = {
     user_list: [
@@ -41,6 +46,11 @@ const users = {
             id: "zap555",
             name: "Dennis",
             job: "Bartender"
+        },
+        {
+            "id": "qwe123",
+            "job": "Zookeeper",
+            "name": "Cindy"
         }
     ]
 };
@@ -68,5 +78,5 @@ app.get("/users/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}/users/zap555`);
+  console.log(`Example app listening at http://localhost:${port}/users`);
 });
