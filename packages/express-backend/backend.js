@@ -10,6 +10,10 @@ const findUserByName = (name) => {
     );
 };
 
+const findUserById = (id) =>
+    users["user_list"].find((user) =>
+    user["id"] === id);
+
 
 const users = {
     user_list: [
@@ -27,6 +31,16 @@ const users = {
             id: "ppp222",
             name: "Mac",
             job: "professor"
+        },
+         {
+            id: "yat999",
+            name: "Dee",
+            job: "Aspiring actress"
+        },
+        {
+            id: "zap555",
+            name: "Dennis",
+            job: "Bartender"
         }
     ]
 };
@@ -42,7 +56,17 @@ app.get("/users", (req, res) => {
     }
 });
 
+app.get("/users/:id", (req, res) => {
+    const id = req.params["id"];
+    const result = findUserById(id);
+    if(result===undefined){
+        res.status(404).send("Resource not found.");
+    }
+    else{
+        res.json(result);
+    }
+});
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}/users`);
+  console.log(`Example app listening at http://localhost:${port}/users/zap555`);
 });
